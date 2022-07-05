@@ -54,26 +54,26 @@
 
                     //const author = citeMLA.split(".")[0].split(",").reverse().map(w => w.trim()).join(" ");
                     const author = citeISO.split(".")[0]
-                                          .replace("(ed","; ed.")
-                                          .split(";")
-                                          .map(au=>au.split(",").reverse()
-                                               .map(w => w.trim())
-                                               .map(w=>w[0].toUpperCase()+w.substr(1).toLowerCase())
-                                               .join(" "))
-                                          .join(", ")
-                                          .replace(", Ed.",", ed.");
+                        .replace("(ed", "; ed.")
+                        .split(";")
+                        .map(au => au.split(",").reverse()
+                            .map(w => w.trim())
+                            .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
+                            .join(" "))
+                        .join(", ")
+                        .replace(", Ed.", ", ed.");
 
                     const publisher = citeAPA.split(".").reverse()[1];
 
                     const number = citeMLA.match(/[0-9]{1,}[.]{1}[0-9]{1,}/g) &&
-                                   citeMLA.match(/[0-9]{1,}[.]{1}[0-9]{1,}/g)[0] || "";
+                        citeMLA.match(/[0-9]{1,}[.]{1}[0-9]{1,}/g)[0] || "";
 
 
-                    const pages =  citeISO.match(/p. [0-9]{1,}[\-]{1}[0-9]{1,}/) &&
-                                   citeISO.match(/p. [0-9]{1,}[\-]{1}[0-9]{1,}/)[0] || "";
+                    const pages = citeISO.match(/p. [0-9]{1,}[\-]{1}[0-9]{1,}/) &&
+                        citeISO.match(/p. [0-9]{1,}[\-]{1}[0-9]{1,}/)[0] || "";
 
-                    const page =   citeISO.match(/p. [0-9]{1,}/) &&
-                                   citeISO.match(/p. [0-9]{1,}/)[0] || "";
+                    const page = citeISO.match(/p. [0-9]{1,}/) &&
+                        citeISO.match(/p. [0-9]{1,}/)[0] || "";
 
 
 
@@ -81,10 +81,10 @@
                     $(`#item-${id}`).data({
                         author: author,
                         number: number,
-                        pages: pages && pages.replace("p.","pp.")|| "" ,
+                        pages: pages && pages.replace("p.", "pp.") || "",
                         page: pages ? "" : page,
                         article: journal,
-                        publisher:publisher && publisher.trim(),
+                        publisher: publisher && publisher.trim(),
                     });
 
 
@@ -98,16 +98,16 @@
                         citeMLA: citeMLA,
                     })
 
-                     data =$(`#item-${id}`).data();
+                    data = $(`#item-${id}`).data();
 
 
                     const filename = data.article ?
-                          `${data.author} [${data.year}]. ${data.title}. ${data.journal} ${data.number}, ${data.pages}${data.page}`
-                          : `${data.author} (${data.year}). ${data.title}. ${data.publisher}`;
+                        `${data.author} [${data.year}]. ${data.title}. ${data.journal} ${data.number}, ${data.pages}${data.page}` :
+                        `${data.author} (${data.year}). ${data.title}. ${data.publisher}`;
 
-                     console.log("filename",filename);
-                    $(`#item-${id}`).data("filename",filename);
-                     new nstring(data.filename).copy2();
+                    console.log("filename", filename);
+                    $(`#item-${id}`).data("filename", filename);
+                    new nstring(data.filename).copy2();
 
 
 
